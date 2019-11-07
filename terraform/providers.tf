@@ -4,8 +4,6 @@
 
 provider "aws" {
   region = "ap-southeast-1"
-  access_key = "AKIA5CMQW4ICBK4QL3KZ"
-  secret_key = "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"
 }
 
 # Using these data sources allows the configuration to be
