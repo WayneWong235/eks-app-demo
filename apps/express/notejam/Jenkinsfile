@@ -1,0 +1,81 @@
+pipeline {
+	agent any
+	tools { nodejs "nodejs10.x" }
+	
+	stages {
+		stage('Install') {
+			steps {
+                sh 'npm config ls'
+				sh '''
+					cd express/notejam
+					npm install
+				'''
+			}
+		}
+
+		stage('Build') {
+			when { branch 'express' }
+			steps { 
+				sh '''
+					cd express/notejam
+					docker build -t waynewong/express:${BUILD_NUMBER} .
+				'''
+			}
+		}
+
+		stage('Test') {
+			steps { 
+				echo 'Run test'
+			}
+		}
+
+		stage('Push') {
+			when { branch 'express' }
+			steps {
+				withDockerRegistry([ credentialsId: "dockerhub", url: "" ]) {
+					sh 'docker push waynewong/express:${BUILD_NUMBER}'
+				}
+			}
+		}
+
+		stage('Deploy to DEV') {
+			when { branch 'express' }
+			steps {
+				sh '''
+					cd helm/apps/dev
+					sudo /usr/local/bin/helm upgrade --install express-dev express/ --namespace dev --set image.tag=${BUILD_NUMBER}
+				'''
+			}
+		}
+
+		stage('Deploy to QA') {
+			when { branch 'express' }
+			steps {
+				sh '''
+					cd helm/apps/qa
+					sudo /usr/local/bin/helm upgrade --install express-qa express/ --namespace qa --set image.tag=${BUILD_NUMBER}
+				'''
+			}
+		}
+
+		stage('Deploy to UAT') {
+			when { branch 'express' }
+			steps {
+				sh '''
+					cd helm/apps/uat
+					sudo /usr/local/bin/helm upgrade --install express-uat express/ --namespace uat --set image.tag=${BUILD_NUMBER}
+				'''
+			}
+		}
+
+		stage('Deploy to Prod') {
+			when { branch 'express' }
+			steps {
+				sh '''
+					cd helm/apps/prod
+					sudo /usr/local/bin/helm upgrade --install express-prod express/ --namespace prod --set image.tag=${BUILD_NUMBER}
+				'''
+			}
+		}
+	}
+}
