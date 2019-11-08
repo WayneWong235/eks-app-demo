@@ -4,6 +4,7 @@ module "aws_es" {
   elasticsearch_version = "7.1"
   cluster_config = {
     dedicated_master_enabled = "true"
+    dedicated_master_count   = "2"
     instance_count           = "2"
     instance_type            = "m5.large.elasticsearch"
     zone_awareness_enabled   = "true"
