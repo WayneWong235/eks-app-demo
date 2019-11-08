@@ -63,7 +63,7 @@ Typical application covers following topics:
 How to launch
 =============
 
-All implementations are SQLite based and quickly launchable by built-in web servers.
+All implementations are AWS RDS MySQL based launchable by built-in web servers.
 Each implementation has instruction describing easy steps to install environment, launch and run tests.
 
 
