@@ -33,12 +33,14 @@ Notes are grouped in pads.
 
 **Screenshots**
 
+**CICD workflow**
 .. image:: https://github.com/WayneWong235/eks-app-demo/blob/master/architecture/aws_k8s_cicd.png
     :alt: CICD
     :width: 400
     :align: center
     :target: https://github.com/WayneWong235/eks-app-demo/blob/master/architecture/aws_k8s_cicd.png
 
+**AWS EKS K8S cluster**
 .. image:: https://github.com/WayneWong235/eks-app-demo/blob/master/architecture/aws_k8s_cluster.png
     :alt: All notes
     :width: 400
