@@ -18,11 +18,11 @@ Supported frameworks
 
 **Python**
 
-* `Flask <https://github.com/komarserjio/notejam/tree/master/flask>`_
+* `Flask <https://github.com/WayneWong235/eks-app-demo/tree/master/apps/flask>`_
 
 **Javascript (node.js)**
 
-* `Express <https://github.com/komarserjio/notejam/tree/master/express>`_
+* `Express <https://github.com/WayneWong235/eks-app-demo/tree/master/apps/express>`_
 
 ====================
 Application overview
