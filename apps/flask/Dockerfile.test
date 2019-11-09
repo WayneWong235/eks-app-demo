@@ -10,4 +10,7 @@ RUN pip install pymysql
 
 COPY . /app
 
+ENV DB_USERNAME=admin
+ENV DB_PASSWD=Waynewong24.
+
 RUN python tests.py

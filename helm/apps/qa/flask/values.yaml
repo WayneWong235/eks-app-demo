@@ -33,3 +33,9 @@ resources: {}
   # requests:
   #  cpu: 100m
   #  memory: 128Mi
+env:
+  fromSecret:
+    name: db-user-pass
+    data:
+      DB_USERNAME: username
+      DB_PASSWD: password

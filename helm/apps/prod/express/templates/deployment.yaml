@@ -1,3 +1,4 @@
+{{- $secretname  := .Values.env.fromSecret.name -}}
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -29,6 +30,14 @@ spec:
             httpGet:
               path: /
               port: {{ .Values.service.internalPort }}
+          env:
+{{- range $key, $value := .Values.env.fromSecret.data }}
+          - name: {{ $key }}
+            valueFrom:
+              secretKeyRef:
+                  name: {{ $secretname }}
+                  key: {{ $value | quote }}
+{{- end }}
           resources:
 {{ toYaml .Values.resources | indent 12 }}
     {{- if .Values.nodeSelector }}
